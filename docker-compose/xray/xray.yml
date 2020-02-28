@@ -4,6 +4,7 @@ services:
   xray-server:
     image: $XRAY_DOCKER_REPO/xray-server:$XRAY_VERSION
     container_name: xray-server
+    user: root
     ports:
       - "$XRAY_SERVER_PORT:$XRAY_SERVER_PORT"
     depends_on:
@@ -21,6 +22,7 @@ services:
   xray-indexer:
     image: $XRAY_DOCKER_REPO/xray-indexer:$XRAY_VERSION
     container_name: xray-indexer
+    user: root
     depends_on:
       - postgres
       - rabbitmq
@@ -35,6 +37,7 @@ services:
   xray-analysis:
     image: $XRAY_DOCKER_REPO/xray-analysis:$XRAY_VERSION
     container_name: xray-analysis
+    user: root
     depends_on:
       - postgres
       - rabbitmq
@@ -49,6 +52,7 @@ services:
   xray-persist:
     image: $XRAY_DOCKER_REPO/xray-persist:$XRAY_VERSION
     container_name: xray-persist
+    user: root
     depends_on:
       - postgres
       - rabbitmq
@@ -63,6 +67,7 @@ services:
   rabbitmq:
     image: $XRAYDB_DOCKER_REPO/xray-rabbitmq:$RABBITMQ_VERSION
     container_name: xray-rabbitmq
+    user: root
     hostname: $DOCKER_SERVER_HOSTNAME
     volumes:
       - "$XRAY_MOUNT_ROOT/rabbitmq:/var/lib/rabbitmq"
